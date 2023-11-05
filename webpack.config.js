@@ -81,6 +81,13 @@ module.exports = function (env) {
         new HTMLWebpackPlugin({
           template: `${paths.publicPath}/index.html`,
           publicPath: "/",
+          minify: false
+        }),
+        new HTMLWebpackPlugin({
+          template: `${paths.publicPath}/index.html`,
+          filename: '404.html',
+          publicPath: "/",
+          minify: false
         }),
         new webpack.ProgressPlugin(),
         new webpack.ProvidePlugin({

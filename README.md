@@ -1,6 +1,25 @@
-# Browser
+# NEAR BOS Web Component ( custom element )
 
-A framework for reusable components to render and modify SocialDB by Near Social.
+This is a Proof of Concept of embedding a NEAR BOS widget into any web application as a Web Component / Custom element.
+
+Just load react production react bundles into your index.html as shown below, and use the `near-social-viewer` custom element to embed the BOS widget.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Near social</title>
+    <script defer="defer" src="/runtime.REPLACE_WITH_BUNDLE_HASH.bundle.js"></script>
+    <script defer="defer" src="/main.REPLACE_WITH_BUNDLE_HASH.bundle.js"></script></head>
+  <body>
+    <h1>NEAR BOS embeddable custom element</h1>
+    <near-social-viewer></near-social-viewer>
+  </body>
+</html>
+```
+
 
 ## Setup & Development
 
@@ -14,71 +33,3 @@ Start development version:
 yarn start
 ```
 
-## Widget example
-
-Profile view 
-
-```jsx
-let accountId = props.accountId || "eugenethedream";
-let profile = socialGetr(`${accountId}/profile`);
-
-(
-  <div>
-    <img src={profile.image.url}/>
-    <span>{profile.name}</span> <span>(@{accountId})</span>
-  </div>
-);
-```
-
-
-Profile editor 
-
-```jsx
-let accountId = context.accountId;
-
-if (!accountId) {
-  return "Please sign in with NEAR wallet";
-}
-
-const profile = socialGetr(`${accountId}/profile`);
-
-if (profile === null) {
-  return "Loading";
-}
-
-initState({
-  name: profile.name,
-  url: profile.image.url,
-});
-
-const data = {
-  profile: {
-    name: state.name,
-    image: {
-      url: state.url,
-    },
-  },
-};
-
-return (
-  <div>
-    <div>account = {accountId}</div>
-    <div>
-      Name:
-      <input type="text" value={state.name} />
-    </div>
-    <div>
-      Image URL:
-      <input type="text" value={state.url} />
-    </div>
-    <div>Preview</div>
-    <div>
-      <img src={state.url} alt="profile image" /> {state.name}
-    </div>
-    <div>
-      <CommitButton data={data}>Save profile</CommitButton>
-    </div>
-  </div>
-);
-
-```
