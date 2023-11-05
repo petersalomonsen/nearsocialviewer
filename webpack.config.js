@@ -80,7 +80,6 @@ module.exports = function (env) {
         }),
         new HTMLWebpackPlugin({
           template: `${paths.publicPath}/index.html`,
-          favicon: `${paths.publicPath}/favicon.png`,
           publicPath: "/",
         }),
         new webpack.ProgressPlugin(),
